@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     background: #fff;
-    z-index: 999;
+    z-index: 50;
 }
 
 .nav-l-1 {
@@ -38,7 +38,7 @@
     cursor: pointer;
 }
 
-.nav-l-1 button {
+.req-service-btn {
     align-items: center;
     background-color: #0b64fc;
     border: 0;
@@ -65,8 +65,7 @@
     vertical-align: middle;
 }
 
-.nav-l-1 button:hover,
-.nav-l-1 button:focus {
+.req-service-btn:hover {
     background-color: #16437E;
     color: #ffffff;
 }
@@ -133,7 +132,7 @@
     top: 3.8rem;
     position: fixed;
     border-top: 0.5px solid #dbdbdb;
-    z-index: 999;
+    z-index: 50;
 }
 
 .bg-top {
@@ -320,7 +319,7 @@
 }
 
 .card-content h4 {
-   padding-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .why-us {
@@ -335,27 +334,27 @@
 }
 
 .why-us img {
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   height: 32rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 32rem;
 }
 
 .why-us h2 {
-  color: #0b64fc;
-  padding-top: 1rem;
-  font-size: 2.2rem;
+    color: #0b64fc;
+    padding-top: 1rem;
+    font-size: 2.2rem;
 }
 
 .why-us-p {
-   padding-top: 1rem;
-   color: #071357;
+    padding-top: 1rem;
+    color: #071357;
 }
 
 .list-2 {
-   padding-top: 2rem;
-   color: #071357;
-   font-weight: 600;
+    padding-top: 2rem;
+    color: #071357;
+    font-weight: 600;
 }
 
 .list-2 div {
@@ -457,4 +456,57 @@ footer {
 .footer-list li {
     padding-bottom: 1rem;
 }
+
+.button-category {
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    color: #2e2e2e;
+    background: #fff;
+}
+
+.popover {
+    display: none;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 3rem;
+    left: 43.5rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 50vw;
+    max-width: 450px;
+    z-index: 999;
+}
+
+.category-container {
+    display: flex;
+    padding: 10px;
+}
+
+.category-list-1, .category-list-2, .category-list-3 {
+    list-style: none; 
+    padding: 10px; 
+    margin: 0;
+}
+
+.category-list-1 li,
+.category-list-2 li,
+.category-list-3 li {
+    font-size: 0.845rem;
+    color: #2e2e2e;
+    cursor: pointer;
+    padding: 5px;
+    transition: background-color 0.3s;
+}
+
+.category-list-1 li:hover, 
+.category-list-2 li:hover,
+.category-list-3 li:hover {
+    color: #0b64fc;
+}
+
 

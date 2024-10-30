@@ -27,6 +27,11 @@
     z-index: 50;
 }
 
+a {
+   text-decoration: none;
+   color: inherit;
+}
+
 .nav-l-1 {
     display: flex;
     gap: 13px;

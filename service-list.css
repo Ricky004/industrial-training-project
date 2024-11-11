@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.packages {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.package-card {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+
+.package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+.package-title {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.package-tag {
+    color: #2E7D32;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.rating::before {
+    content: "★";
+    color: #6200EE;
+}
+
+.price-time {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.time {
+    color: #666;
+    font-size: 14px;
+}
+
+.services {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.services li {
+    margin: 8px 0;
+    color: #444;
+    font-size: 14px;
+}
+
+.services li strong {
+    font-weight: 500;
+}
+
+.add-btn {
+    background: white;
+    color: #6200EE;
+    border: 1px solid #6200EE;
+    padding: 8px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.edit-btn {
+    background: white;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Cart Section */
+.cart-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.cart-empty {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.cart-icon {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Rewards Section */
+.rewards-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.reward-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.reward-icon {
+    color: #2E7D32;
+    font-size: 20px;
+}
+
+/* UC Promise Section */
+.promise-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.promise-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.promise-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    color: #444;
+    font-size: 14px;
+}
+
+.promise-list li::before {
+    content: "✓";
+    color: #2E7D32;
+    font-weight: bold;
+}

@@ -1,3 +1,8 @@
+<?php
+// Start the session to access session variables
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +24,7 @@
             <h2 id="logo">LOGO.</h2>
             <div class="nav-l-1">
                 <a href="service-list.html">
-                    <button class="req-service-btn"> Request a Service</button>
+                    <button class="req-service-btn">Request a Service</button>
                 </a>
                 <li>
                     <button id="categoryButton" class="button-category">Categories</button>
@@ -30,64 +35,30 @@
                 </a>
             </div>
             <div class="nav-l-2">
-                <a href="signup-page.html">
-                    <button class="sign-up">Sign up</button>
-                </a>
-                <a href="login-page.html">
-                    <button class="log-in">Log in</button>
-                </a>
-                <a href="join-as-a-technician.html">
-                    <button class="nav-l2-btn-1">Join as a Technician</button>
-                </a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <div class="profile">
+                        <img src="images/profile.png" alt="profile picture" class="profile-pic">
+                        <div class="profile-badge">
+                            <span> <?php echo htmlspecialchars($_SESSION['fullname']); ?></span>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <a href="signup-page.html">
+                        <button class="sign-up">Sign up</button>
+                    </a>
+                    <a href="login-page.html">
+                        <button class="log-in">Log in</button>
+                    </a>
+                    <a href="join-as-a-technician.html">
+                        <button class="nav-l2-btn-1">Join as a Technician</button>
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
         <hr class="nav-hr">
-        <div id="popover" class="popover">
-            <div class="category-container">
-                <div>
-                    <ul class="category-list-1">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                    <ul class="category-list-2">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                    <ul class="category-list-2">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="category-list-1">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                    <ul class="category-list-2">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                    <ul class="category-list-2">
-                        <li>Electrician</li>
-                        <li>Plumber</li>
-                        <li>HVAC Technician</li>
-                        <li>Appliance Repair Technician</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
         <div class="bg-top">
-            <div class="">
+            <div>
                 <div>
                     <p class="text-1">GET TASK DONE BY</p>
                     <span class="fancy">PROFESSIONALS</span>
@@ -98,17 +69,17 @@
                     <button class="bg-btn-2">Earn money as a Technician</button>
                 </div>
                 <div class="desc-1">
-                    <img src="/images/people.png" alt="user">
+                    <img src="images/people.png" alt="user">
                     <div>
                         <p>1M+</p>
                         <p>customer</p>
                     </div>
-                    <img src="/images/verified.png" alt="verified">
+                    <img src="images/verified.png" alt="verified">
                     <div>
                         <p>verified</p>
                         <p>technician</p>
                     </div>
-                    <img src="/images/star.png" alt="star">
+                    <img src="images/star.png" alt="star">
                     <div>
                         <p>4.4</p>
                         <p>star rating</p>
@@ -116,10 +87,11 @@
                 </div>
             </div>
             <div>
-                <img src="/images/pit-1.png" class="pit-1" alt="Technician-1">
-                <img src="/images/pit-2.png" class="pit-2" alt="Technician-2">
+                <img src="images/pit-1.png" class="pit-1" alt="Technician-1">
+                <img src="images/pit-2.png" class="pit-2" alt="Technician-2">
             </div>
         </div>
+
         <h2 class="list-h">Most book services</h2>
         <div class="top-service-list">
             <div>
@@ -180,7 +152,7 @@
             </div>
         </div>
         <div class="why-us">
-            <img src="/images/pit-4.png" alt="">
+            <img src="images/pit-4.png" alt="">
             <div class="">
                 <div class="why-us-chip">why us</div>
                 <h2>Our Commitment to Excellence</h2>
@@ -217,9 +189,9 @@
             <div class="footer-social">
                 <p>Follow us on:</p>
                 <div>
-                    <img src="/images/instagram.png" alt="">
-                    <img src="/images/facebook.png" alt="">
-                    <img src="/images/twitter.png" alt="">
+                    <img src="images/instagram.png" alt="">
+                    <img src="images/facebook.png" alt="">
+                    <img src="images/twitter.png" alt="">
                 </div>
             </div>
         </div>

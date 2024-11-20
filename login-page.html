@@ -17,23 +17,20 @@
     <div class="container">
         <div class="form-box">
             <h2>Log In</h2>
-            <form>
+            <form action="backend/user_login.php" method="POST">
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-group">
                     <select class="country-code">
                       <option value="+91">+91</option>
-                      <option value="+1">+1</option>
-                      <option value="+44">+44</option>
-                      <option value="+61">+61</option>
                     </select>
-                    <input type="tel" placeholder="Phone Number" required>
+                    <input type="tel" name="phn" placeholder="Phone Number" required>
                   </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit" class="btn">Log in</button>
             </form>

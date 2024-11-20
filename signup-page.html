@@ -17,27 +17,25 @@
     <div class="container">
         <div class="form-box">
             <h2>Create an Account</h2>
-            <form onsubmit="validatePasswords(event)">
+            <!-- Connect to process.php -->
+            <form action="backend/user_register.php" method="POST" onsubmit="validatePasswords(event)">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" name="fullname" placeholder="Full Name" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-group">
-                    <select class="country-code">
-                      <option value="+91">+91</option>
-                      <option value="+1">+1</option>
-                      <option value="+44">+44</option>
-                      <option value="+61">+61</option>
+                    <select class="country-code" name="country_code">
+                        <option value="+91">+91</option>
                     </select>
-                    <input type="tel" placeholder="Phone Number" required>
-                  </div>
+                    <input type="tel" name="phn" placeholder="Phone Number" required>
+                </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
@@ -54,18 +52,18 @@
     </div>
     <script>
         function validatePasswords(event) {
-          const password = document.getElementById("password").value;
-          const confirmPassword = document.getElementById("confirmPassword").value;
-          const errorMessage = document.getElementById("error-message");
-      
-          if (password !== confirmPassword) {
-            event.preventDefault();  // Prevent form submission
-            errorMessage.style.display = "block";  // Show error message
-          } else {
-            errorMessage.style.display = "none";   // Hide error message
-          }
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (password !== confirmPassword) {
+                event.preventDefault(); // Prevent form submission
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
         }
-      </script>         
+    </script>
 </body>
 
 </html>

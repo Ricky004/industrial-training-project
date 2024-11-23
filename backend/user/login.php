@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = htmlspecialchars($_POST['password']);
 
     // Prepare the SQL query to check if the user exists
-    $sql = "SELECT id, fullname, password FROM user WHERE email = ?";
+    $sql = "SELECT user_id, user_name, password FROM user WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if a user with the entered email exists
         if ($stmt->num_rows > 0) {
             // Bind the result to variables
-            $stmt->bind_result($id, $fullname, $hashed_password);
+            $stmt->bind_result($id, $username, $hashed_password);
 
             // Fetch the result
             $stmt->fetch();
@@ -36,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashed_password)) {
                 // Password is correct, set session variables
                 $_SESSION['user_id'] = $id;
-                $_SESSION['fullname'] = $fullname;
+                $_SESSION['user_name'] = $username;
                 $_SESSION['email'] = $email;
 
                 // Redirect to the home page (index.php)
-                header("Location: ../index.php");
+                header("Location: ../../index.php");
                 exit();
             } else {
                 // Invalid password

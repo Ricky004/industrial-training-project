@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="join-as-a-technician.css">
-    <title>Join as a technician</title>
+    <title>Join as a Technician</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -15,110 +15,54 @@
         <h1>Joining Technician Application Form</h1>
         <p class="subtitle">Fill out the form below to apply for a Technician role.</p>
 
-        <form>
+        <form action="backend/register.php" method="POST">
             <div class="form-group">
                 <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" placeholder="Enter your full name">
+                <input type="text" id="fullName" name="name" placeholder="Enter your full name" required>
             </div>
 
             <div class="row">
                 <div class="col form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email address">
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
                 </div>
 
                 <div class="col form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="currentAddress">Current Address</label>
-                <textarea id="currentAddress" rows="3" placeholder="Enter your current address"></textarea>
+                <textarea id="currentAddress" rows="3" name="address" placeholder="Enter your current address" required></textarea>
                 <p class="helper-text">Please include city, state/province, and zip/postal code.</p>
             </div>
 
-            <div class="form-group">
-                <label for="duration">How long have you been at your current address?</label>
-                <select id="duration">
-                    <option value="">Select the duration</option>
+            <div class="form-group"> 
+                <label for="duration">Experience of Work</label>
+                <select id="duration" name="experience" required>
+                    <option value="" disabled selected>Select the duration</option>
                     <option value="0-6">0-6 months</option>
                     <option value="6-12">6-12 months</option>
                     <option value="1-2">1-2 years</option>
                     <option value="2+">2+ years</option>
                 </select>
             </div>
-
+            
             <div class="form-group">
-                <label for="income">Monthly Income</label>
-                <input type="number" id="income" placeholder="Enter your monthly income">
-                <p class="helper-text">Please include all sources of income.</p>
+                <label for="password">password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
 
             <div class="form-group">
-                <label for="employer">Employer</label>
-                <input type="text" id="employer" placeholder="Enter your current employer">
+                <label for="typeofservice">Type of Service</label>
+                <input type="text" id="typeofservice" name="typeofservice" placeholder="Enter your types of service" required>
             </div>
-
-            <div class="form-group">
-                <label for="jobTitle">Job Title</label>
-                <input type="text" id="jobTitle" placeholder="Enter your job title">
-            </div>
-
-            <div class="form-group">
-                <label for="employmentDuration">How long have you been with your current employer?</label>
-                <select id="employmentDuration">
-                    <option value="">Select the duration</option>
-                    <option value="0-6">0-6 months</option>
-                    <option value="6-12">6-12 months</option>
-                    <option value="1-2">1-2 years</option>
-                    <option value="2+">2+ years</option>
-                </select>
-            </div>
-
-            <h2 style="margin: 30px 0 20px; font-size: 20px;">Rental History</h2>
-
-            <div class="form-group">
-                <label for="landlordName">Landlord Name</label>
-                <input type="text" id="landlordName" placeholder="Enter your landlord's name">
-            </div>
-
-            <div class="form-group">
-                <label for="landlordPhone">Landlord Phone Number</label>
-                <input type="tel" id="landlordPhone" placeholder="Enter your landlord's phone number">
-            </div>
-
-            <div class="form-group">
-                <label for="monthlyRent">Monthly Rent</label>
-                <input type="number" id="monthlyRent" placeholder="Enter your monthly rent">
-            </div>
-
-            <div class="form-group">
-                <label for="moveReason">Reason for Moving</label>
-                <textarea id="moveReason" rows="3" placeholder="Enter the reason for moving"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Have you ever been evicted from a rental property?</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="evicted" value="yes"> Yes
-                    </label>
-                    <label>
-                        <input type="radio" name="evicted" value="no"> No
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="comments">Additional Comments</label>
-                <textarea id="comments" rows="4" placeholder="Enter any additional comments or information"></textarea>
-            </div>
-
+            
             <div class="checkbox-group">
                 <label>
-                    <input type="checkbox" id="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
                     I have read and agree to the terms and conditions.
                 </label>
             </div>

@@ -18,10 +18,10 @@
         <div class="form-box">
             <h2>Create an Account</h2>
             <!-- Connect to process.php -->
-            <form action="backend/user_register.php" method="POST" onsubmit="validatePasswords(event)">
+            <form action="backend/user/register.php" method="POST" onsubmit="validatePasswords(event)">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="fullname" placeholder="Full Name" required>
+                    <input type="text" name="user_name" placeholder="Full Name" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
@@ -31,7 +31,7 @@
                     <select class="country-code" name="country_code">
                         <option value="+91">+91</option>
                     </select>
-                    <input type="tel" name="phn" placeholder="Phone Number" required>
+                    <input type="tel" name="phone_no" placeholder="Phone Number" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-lock"></i>

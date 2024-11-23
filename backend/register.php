@@ -1,25 +1,45 @@
 <?php
+
 include('connection.php');
 
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['technician_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password
     $phone = $_POST['phone'];
-    $type_of_service = $_POST['type_of_service'];
+    $type_of_service = $_POST['typeofservice'];
+    $address = $_POST['address'];
+    $experience = $_POST['experience'];
+    $terms_condition = $_POST['terms'];
 
-    $sql = "INSERT INTO technician (technician_id, name, email, password, phone, type_of_service) VALUES ('$id','$name', '$email', '$password', '$phone', '$type_of_service')";
+    // Prepare and execute the SQL statement
+    $sql = "INSERT INTO technacian (name, email, password, address, experience, phone, type_of_service, terms_condition) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssisss", $name, $email, $password, $address, $experience, $phone, $type_of_service, $terms_condition);
 
-    if (mysqli_query($conn, $sql)) {
-        header("Location: login.php");
+    if ($stmt->execute()) {
+        // Get the ID of the inserted technician
+        $technician_id = $stmt->insert_id;
+
+        // Set session variables
+        $_SESSION['technician_id'] = $technician_id;
+        $_SESSION['name'] = $name;
+
+        // Redirect to the homepage
+        header("Location: ../index.php");
+        exit();
     } else {
-        echo "Error: " . $sql . "<br>" . 
-
-mysqli_error($conn);
+        // Display an error message
+        echo "Error: " . $stmt->error;
     }
+
+    // Close the statement
+    $stmt->close();
 }
 
-mysqli_close($conn);
+// Close the database connection
+$conn->close();
 ?>
-

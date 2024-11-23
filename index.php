@@ -21,7 +21,7 @@ session_start();
 <body>
     <main>
         <div id="navbar">
-            <h2 id="logo">LOGO.</h2>
+            <h2 id="logo">TechCare</h2>
             <div class="nav-l-1">
                 <a href="service-list.html">
                     <button class="req-service-btn">Request a Service</button>
@@ -39,7 +39,15 @@ session_start();
                     <div class="profile">
                         <img src="images/profile.png" alt="profile picture" class="profile-pic">
                         <div class="profile-badge">
-                            <span> <?php echo htmlspecialchars($_SESSION['fullname']); ?></span>
+                            <span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                        </div>
+                    </div>
+                <?php elseif (isset($_SESSION['technician_id'])): ?>
+                    <div class="profile">
+                        <img src="images/profile.png" alt="profile picture" class="profile-pic">
+                        <div class="profile-badge">
+                            <span><?php echo htmlspecialchars($_SESSION['name']); ?></span>
+                            <i class="fa-solid fa-fire"></i>
                         </div>
                     </div>
                 <?php else: ?>
@@ -53,6 +61,7 @@ session_start();
                         <button class="nav-l2-btn-1">Join as a Technician</button>
                     </a>
                 <?php endif; ?>
+
             </div>
         </div>
         <hr class="nav-hr">
@@ -189,9 +198,9 @@ session_start();
             <div class="footer-social">
                 <p>Follow us on:</p>
                 <div>
-                    <img src="images/instagram.png" alt="">
+                    <!-- <img src="images/instagram.png" alt="">
                     <img src="images/facebook.png" alt="">
-                    <img src="images/twitter.png" alt="">
+                    <img src="images/twitter.png" alt=""> -->
                 </div>
             </div>
         </div>

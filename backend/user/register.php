@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Execute the statement
         if ($stmt->execute()) {
-            header("Location: ../../index.php");
+            header("Location: ../../login-page.html");
         } else {
             echo "Error: " . $stmt->error;
         }

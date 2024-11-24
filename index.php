@@ -1,5 +1,4 @@
 <?php
-// Start the session to access session variables
 session_start();
 ?>
 
@@ -47,15 +46,19 @@ session_start();
                     <div class="profile">
                         <img src="images/profile.png" alt="profile picture" class="profile-pic">
                         <div class="profile-badge">
-                            <span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                            <a href="backend/user/profile.php">
+                                <span><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                            </a>
                         </div>
                     </div>
                 <?php elseif (isset($_SESSION['technician_id'])): ?>
                     <div class="profile">
                         <img src="images/handyman.png" alt="profile picture" class="profile-pic">
                         <div class="profile-badge">
-                            <span><?php echo htmlspecialchars($_SESSION['name']); ?></span>
-                            <i class="fa-solid fa-fire"></i>
+                            <a href="backend/profile.php">
+                                <span><?php echo htmlspecialchars($_SESSION['name']); ?></span>
+                                <i class="fa-solid fa-fire"></i>
+                            </a>
                         </div>
                     </div>
                 <?php else: ?>
@@ -82,8 +85,12 @@ session_start();
                 </div>
                 <p class="text-2">Expert Help, Just a Click Away.</p>
                 <div class="btn-grp-1">
-                    <button class="bg-btn-1">Request a Service</button>
-                    <button class="bg-btn-2">Earn money as a Technician</button>
+                    <a href="service-list.php">
+                        <button class="bg-btn-1">Request a Service</button>
+                    </a>
+                    <a href="join-as-a-technician.html">
+                        <button class="bg-btn-2">Earn money as a Technician</button>
+                    </a>
                 </div>
                 <div class="desc-1">
                     <img src="images/people.png" alt="user">
@@ -191,7 +198,9 @@ session_start();
                         Affordable Rates
                     </div>
                 </div>
-                <button class="">BooK a Service</button>
+                <a href="service-list.php">
+                    <button>BooK a Service</button>
+                </a>
             </div>
         </div>
     </main>

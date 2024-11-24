@@ -12,7 +12,4 @@ mysqli_query($conn, $query);
 // Display cancellation confirmation
 echo "Booking cancelled successfully!";
 
-echo '<a href="dashboard.php" class="btn btn-primary">Back to Dashboard</a>'; // Output HTML as a string
-
-
 ?>

@@ -11,7 +11,7 @@ if (isset($_SESSION['technician_id'])) {
 }
 
 // Fetch the technician's profile details from the database
-$query = "SELECT * FROM technician WHERE technician_id = '$technician_id'";
+$query = "SELECT * FROM technacian WHERE technacian_id = '$technician_id'";
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) == 1) {
@@ -23,16 +23,64 @@ if (mysqli_num_rows($result) == 1) {
 ?>
 
 <!-- Display the technician's profile -->
-<h1>Your Profile</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p><strong>id:</strong> <?php echo $technician['technician_id']; ?></p>
-<p><strong>Name:</strong> <?php echo $technician['name']; ?></p>
-<p><strong>Email:</strong> <?php echo $technician['email']; ?></p>
-<p><strong>Password:</strong> <?php echo $technician['password']; ?></p>
-<p><strong>Phone:</strong> <?php echo $technician['phone']; ?></p>
-<p><strong>Type of service:</strong> <?php echo $technician['type_of_service']; ?></p>
-<p><strong>Avalability:</strong> <?php echo $technician['avalability']; ?></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="user/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>profile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+</head>
 
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1>Profile Information</h1>
+            <p>View and edit your profile details below.</p>
+        </div>
+        <img src="../images/handyman.png" alt="profile-image">
+        <div class="profile-field">
+            <label>Full Name</label>
+            <input type="text" value="<?php echo htmlspecialchars($technician['name']); ?>" readonly>
+        </div>
 
-<!-- Link to edit profile -->
-<a href="edit.php">Edit Profile</a>
+        <div class="profile-row">
+            <div class="profile-field">
+                <label>Email Address</label>
+                <input type="email" value="<?php echo htmlspecialchars($technician['email']); ?>" readonly>
+            </div>
+            <div class="profile-field">
+                <label>Phone Number</label>
+                <input type="tel" value="<?php echo htmlspecialchars($technician['phone']); ?>" readonly>
+            </div>
+        </div>
+
+        <div class="profile-field">
+            <label>Current Position</label>
+            <input type="text" value="<?php echo htmlspecialchars($technician['address']); ?>" readonly>
+        </div>
+        <div class="profile-field">
+            <label>Current Position</label>
+            <input type="text" value="<?php echo htmlspecialchars($technician['experience']); ?>" readonly>
+        </div>
+        <div class="profile-field">
+            <label>Current Position</label>
+            <input type="text" value="<?php echo htmlspecialchars($technician['type_of_service']); ?>" readonly>
+        </div>
+        <a href="edit.php">
+            <button class="edit">Edit</button>
+        </a>
+        <a href="user/logout.php">
+            <button class="logout">log out</button>
+        </a>
+    </div>
+
+</body>
+
+</html>

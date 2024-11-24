@@ -15,12 +15,14 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="service-list.css">
     <title>Service List</title>
 </head>
+
 <body>
     <div class="container">
         <div class="packages">
@@ -76,27 +78,32 @@ $result = $conn->query($sql);
 
         <div class="sidebar">
             <?php
-            // Show cart section only if the user is logged in
             if ($user_id) {
                 echo "<div class='cart-section'>
-                    <h3>Your Cart</h3>";
+        <h3>Your Cart</h3>";
 
-                // Query to display items in the cart for the logged-in user
-                $cart_sql = "SELECT service_name, paystatus, quantity FROM book WHERE user_id = $user_id";
+                $cart_sql = "SELECT book_id, service_name, paystatus, quantity FROM book WHERE user_id = $user_id AND paystatus != 'cancelled'";
                 $cart_result = $conn->query($cart_sql);
 
                 if ($cart_result->num_rows > 0) {
                     echo "<ul>";
                     while ($cart_row = $cart_result->fetch_assoc()) {
+                        $book_id = htmlspecialchars($cart_row['book_id']);
                         $cart_service_name = htmlspecialchars($cart_row['service_name']);
                         $cart_price = htmlspecialchars($cart_row['paystatus']);
                         $cart_quantity = htmlspecialchars($cart_row['quantity']);
 
                         echo "
-                        <li class='cart-item'>
-                            <strong class='service-name'>$cart_service_name</strong> - <span class='price'>₹$cart_price</span> (<span class='quantity'>x$cart_quantity</span>)
-                        </li>
-                        ";
+            <li class='cart-item'>
+                <strong class='service-name'>$cart_service_name</strong> - 
+                <span class='price'>₹$cart_price</span> 
+                (<span class='quantity'>x$cart_quantity</span>)
+                <form action='backend/user/cancel_booking.php' method='GET' style='display:inline;'>
+                    <input type='hidden' name='booking_id' value='$book_id'>
+                    <button type='submit' class='cancel-btn'>Cancel</button>
+                </form>
+            </li>
+            ";
                     }
                     echo "</ul>";
                 } else {
@@ -106,6 +113,7 @@ $result = $conn->query($sql);
                 echo "</div>";
             }
             ?>
+
 
             <div class="rewards-section">
                 <div class="reward-header">
@@ -128,6 +136,7 @@ $result = $conn->query($sql);
     </div>
 
 </body>
+
 </html>
 
 <?php

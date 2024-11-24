@@ -23,13 +23,21 @@ session_start();
         <div id="navbar">
             <h2 id="logo">TechCare</h2>
             <div class="nav-l-1">
-                <a href="service-list.html">
-                    <button class="req-service-btn">Request a Service</button>
-                </a>
+                <?php if (isset($_SESSION['technician_id'])): ?>
+                    <a href="create-service.html">
+                        <button class="req-service-btn">Create a Service</button>
+                    </a>
+                <?php else: ?>
+                    <a href="service-list.php">
+                        <button class="req-service-btn">Request a Service</button>
+                    </a>
+                <?php endif; ?>
                 <li>
                     <button id="categoryButton" class="button-category">Categories</button>
                 </li>
-                <li>Browse services</li>
+                <a href="service-list.php">
+                    <li>Browse services</li>
+                </a>
                 <a href="how-it-works.html">
                     <li>How it works</li>
                 </a>
@@ -44,7 +52,7 @@ session_start();
                     </div>
                 <?php elseif (isset($_SESSION['technician_id'])): ?>
                     <div class="profile">
-                        <img src="images/profile.png" alt="profile picture" class="profile-pic">
+                        <img src="images/handyman.png" alt="profile picture" class="profile-pic">
                         <div class="profile-badge">
                             <span><?php echo htmlspecialchars($_SESSION['name']); ?></span>
                             <i class="fa-solid fa-fire"></i>

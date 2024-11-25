@@ -529,3 +529,13 @@ footer {
 .category-list-3 li:hover {
     color: #0b64fc;
 }
+
+.admin-btn {
+    background-color: #374e66;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}

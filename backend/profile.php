@@ -62,15 +62,15 @@ if (mysqli_num_rows($result) == 1) {
         </div>
 
         <div class="profile-field">
-            <label>Current Position</label>
+            <label>Address</label>
             <input type="text" value="<?php echo htmlspecialchars($technician['address']); ?>" readonly>
         </div>
         <div class="profile-field">
-            <label>Current Position</label>
+            <label>experience</label>
             <input type="text" value="<?php echo htmlspecialchars($technician['experience']); ?>" readonly>
         </div>
         <div class="profile-field">
-            <label>Current Position</label>
+            <label>Type of service</label>
             <input type="text" value="<?php echo htmlspecialchars($technician['type_of_service']); ?>" readonly>
         </div>
         <a href="edit.php">

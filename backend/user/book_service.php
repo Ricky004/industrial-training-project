@@ -61,7 +61,7 @@ if (mysqli_num_rows($result) > 0) {
             echo "Booking updated successfully!<br>";
             echo "Service Name: " . htmlspecialchars($service_row['service_name']) . "<br>";
             echo "Technician Assigned: " . htmlspecialchars($technician_row['name']) . "<br>";
-            echo '<a href="../../index.php" class="btn btn-primary">Back to home</a>';
+            echo '<a href="../../service-list.php" class="btn btn-primary">Back to browse service</a>';
         } else {
             die("Error updating booking: " . mysqli_error($conn));
         }
@@ -75,7 +75,7 @@ if (mysqli_num_rows($result) > 0) {
             echo "Service booked successfully!<br>";
             echo "Service Name: " . htmlspecialchars($service_row['service_name']) . "<br>";
             echo "Technician Assigned: " . htmlspecialchars($technician_row['name']) . "<br>";
-            echo '<a href="../../index.php" class="btn btn-primary">Back to home</a>';
+            echo '<a href="../../service-list.php" class="btn btn-primary">Back to browse service</a>';
         } else {
             die("Error inserting booking: " . mysqli_error($conn));
         }

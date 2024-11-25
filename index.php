@@ -61,6 +61,15 @@ session_start();
                             </a>
                         </div>
                     </div>
+                <?php elseif (isset($_SESSION['admin_id'])): ?>
+                    <div class="profile">
+                        <img src="images/handyman.png" alt="profile picture" class="profile-pic">
+                        <div class="profile-badge">
+                            <a href="backend/admin/profile.php">
+                                <span><?php echo htmlspecialchars($_SESSION['admin_name']); ?></span>
+                            </a>
+                        </div>
+                    </div>
                 <?php else: ?>
                     <a href="signup-page.html">
                         <button class="sign-up">Sign up</button>
@@ -70,6 +79,9 @@ session_start();
                     </a>
                     <a href="join-as-a-technician.html">
                         <button class="nav-l2-btn-1">Join as a Technician</button>
+                    </a>
+                    <a href="backend/admin/register.php">
+                        <button class="admin-btn">Admin</button>
                     </a>
                 <?php endif; ?>
 

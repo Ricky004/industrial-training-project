@@ -31,9 +31,11 @@ session_start();
                         <button class="req-service-btn">Request a Service</button>
                     </a>
                 <?php endif; ?>
-                <li>
-                    <button id="categoryButton" class="button-category">Categories</button>
-                </li>
+                <?php if (isset($_SESSION['technacian_id'])): ?>
+                    <a href="backend/my_services.php">
+                        <button id="categoryButton" class="button-category">My Services</button>
+                    </a>
+                <?php endif; ?>
                 <a href="service-list.php">
                     <li>Browse services</li>
                 </a>

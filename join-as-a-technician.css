@@ -115,6 +115,16 @@ button:hover {
     background-color: #0056b3;
 }
 
+.login-link {
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.register-link {
+    padding-top: 10px;
+    font-size: 14px;
+}
+
 @media (max-width: 768px) {
     .row {
         flex-direction: column;

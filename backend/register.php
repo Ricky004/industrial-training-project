@@ -2,8 +2,6 @@
 
 include('connection.php');
 
-session_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -21,15 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssisss", $name, $email, $password, $address, $experience, $phone, $type_of_service, $terms_condition);
 
     if ($stmt->execute()) {
-        // Get the ID of the inserted technician
-        $technician_id = $stmt->insert_id;
-
-        // Set session variables
-        $_SESSION['technician_id'] = $technician_id;
-        $_SESSION['name'] = $name;
-
-        // Redirect to the homepage
-        header("Location: ../index.php");
+        header("Location: login.php");
         exit();
     } else {
         // Display an error message

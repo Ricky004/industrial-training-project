@@ -1,42 +1,77 @@
 <?php
-session_start();
-include('connection.php');
 
-if (isset($_POST['login'])) {
+include('connection.php');
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM technician WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $technician = mysqli_fetch_assoc($result);
-    if($result){
+    // Prepare the SQL query to fetch technician details
+    $sql = "SELECT * FROM technacian WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($technician && password_verify($password, $technician['password'])) {
-        $_SESSION['technician_id'] = $technician['technician_id'];
-        $_SESSION['email'] = $technician['email'];
-        $_SESSION['password'] = $technician['password'];
-        header("Location: dashboard.php");
+    if ($result->num_rows > 0) {
+        // Fetch technician details
+        $technician = $result->fetch_assoc();
+
+        // Verify password
+        if (password_verify($password, $technician['password'])) {
+            // Set session variables
+            $_SESSION['technician_id'] = $technician['technacian_id'];
+            $_SESSION['name'] = $technician['name'];
+
+            // Redirect to the homepage
+            header("Location: ../index.php");
+            exit();
+        } else {
+            echo "Invalid email or password.";
+        }
     } else {
-
-        echo "Invalid email or password.";
+        echo "No user found with this email.";
     }
-}else{
-    echo "no user found with this email";
-}
+
+    $stmt->close();
 }
 
-mysqli_close($conn);
+$conn->close();
 ?>
 
-<form action="login.php" method="POST">
-<label for="id">Id:</label><br>
-        <input type="text"  name="technician_id" required><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <button type="submit" name="login">Login</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../join-as-a-technician.css">
+    <title>Technician Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Technician Login</h1>
+        <p class="subtitle">Enter your credentials to access your account.</p>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" name="login">Log In</button>
+            <p class="register-link">Don't have an account? <a href="../join-as-a-technician.html">Register</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -44,7 +44,7 @@ if (mysqli_num_rows($result) > 0) {
     $technician_row = mysqli_fetch_assoc($result);
     
     // Check if the service is already booked for this user
-    $check_query = "SELECT * FROM book WHERE user_id = $user_id AND service_id = $service_id AND paystatus = 'pending'";
+    $check_query = "SELECT * FROM book WHERE user_id = $user_id AND service_id = $service_id AND paystatus = 'confirmed'";
     $check_result = mysqli_query($conn, $check_query);
     if (!$check_result) {
         die("Error checking booking: " . mysqli_error($conn));
@@ -67,8 +67,8 @@ if (mysqli_num_rows($result) > 0) {
         }
     } else {
         // Service not booked, insert a new booking with quantity 1
-        $insert_query = "INSERT INTO book (service_name, request_id, technacian_id, paystatus, service_id, user_id, quantity)
-                         VALUES ('$service_name', '', '$technician_id', 'pending', '$service_id', '$user_id', 1)";
+        $insert_query = "INSERT INTO book (service_name, request_id, technacian_id, paystatus, technician_status, service_id, user_id, quantity)
+                         VALUES ('$service_name', '', '$technician_id', 'confirmed', 'pending','$service_id', '$user_id', 1)";
                          
         if (mysqli_query($conn, $insert_query)) {
             // Display booking confirmation

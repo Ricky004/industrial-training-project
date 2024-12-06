@@ -62,6 +62,13 @@ textarea {
     margin-right: 8px;
 }
 
+#typeofservice {
+    margin-top: 10px; 
+    width: 100%;
+    border: 1px solid #ddd;
+    height: 40px;
+}
+
 button {
     background-color: #007bff;
     color: white;

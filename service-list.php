@@ -9,7 +9,16 @@ $isTechnician = isset($_SESSION['technician_id']);
 // Check if the logged-in user is a customer (user)
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-$sql = "SELECT id, service_name, price, description FROM `all services`";
+// Handle service type selection
+$service_type = isset($_GET['service_type']) ? $_GET['service_type'] : 'all';
+
+// Adjust SQL query based on selected service type
+if ($service_type === 'all') {
+    $sql = "SELECT id, service_name, price, description FROM `all services`";
+} else {
+    $sql = "SELECT id, service_name, price, description FROM `all services` WHERE type_of_service = '$service_type'";
+}
+
 $result = $conn->query($sql);
 ?>
 
@@ -27,6 +36,16 @@ $result = $conn->query($sql);
     <div class="container">
         <div class="packages">
             <h1>Available Services</h1>
+            
+            <!-- Dropdown to select service type -->
+            <form method="GET" style="margin-bottom: 20px;">
+                <label for="service_type">Filter by Service Type:</label>
+                <select name="service_type" id="service_type" onchange="this.form.submit()">
+                    <option value="all" <?= $service_type === 'all' ? 'selected' : '' ?>>All</option>
+                    <option value="technician" <?= $service_type === 'technician' ? 'selected' : '' ?>>Technician</option>
+                    <option value="electrician" <?= $service_type === 'electrician' ? 'selected' : '' ?>>Electrician</option>
+                </select>
+            </form>
 
             <?php
             if ($result->num_rows > 0) {
@@ -73,7 +92,6 @@ $result = $conn->query($sql);
                 echo "<p>No services available.</p>";
             }
             ?>
-
         </div>
 
         <div class="sidebar">
@@ -82,7 +100,7 @@ $result = $conn->query($sql);
                 echo "<div class='cart-section'>
         <h3>Your Cart</h3>";
 
-                $cart_sql = "SELECT book_id, service_name, paystatus, quantity FROM book WHERE user_id = $user_id AND paystatus != 'cancelled'";
+                $cart_sql = "SELECT book_id, service_name, technician_status, quantity FROM book WHERE user_id = $user_id AND paystatus != 'cancelled'";
                 $cart_result = $conn->query($cart_sql);
 
                 if ($cart_result->num_rows > 0) {
@@ -90,13 +108,14 @@ $result = $conn->query($sql);
                     while ($cart_row = $cart_result->fetch_assoc()) {
                         $book_id = htmlspecialchars($cart_row['book_id']);
                         $cart_service_name = htmlspecialchars($cart_row['service_name']);
-                        $cart_price = htmlspecialchars($cart_row['paystatus']);
+                        $cart_status = htmlspecialchars($cart_row['technician_status']);
                         $cart_quantity = htmlspecialchars($cart_row['quantity']);
 
-                        echo "
+                        
+                echo "
             <li class='cart-item'>
                 <strong class='service-name'>$cart_service_name</strong> - 
-                <span class='price'>₹$cart_price</span> 
+                <span class='price'>$cart_status</span> 
                 (<span class='quantity'>x$cart_quantity</span>)
                 <form action='backend/user/cancel_booking.php' method='GET' style='display:inline;'>
                     <input type='hidden' name='booking_id' value='$book_id'>
@@ -113,7 +132,6 @@ $result = $conn->query($sql);
                 echo "</div>";
             }
             ?>
-
 
             <div class="rewards-section">
                 <div class="reward-header">

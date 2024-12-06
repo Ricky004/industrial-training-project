@@ -20,6 +20,7 @@ $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +32,7 @@ $result = mysqli_query($conn, $query);
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -39,35 +41,44 @@ $result = mysqli_query($conn, $query);
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         h3 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        th, td {
+
+        th,
+        td {
             padding: 12px;
             text-align: left;
             border: 1px solid #ddd;
         }
+
         th {
             background-color: #007bff;
             color: #fff;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         a {
             text-decoration: none;
             color: #007bff;
             font-weight: bold;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         .message {
             text-align: center;
             padding: 20px;
@@ -76,15 +87,16 @@ $result = mysqli_query($conn, $query);
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <?php
-    if (!$result) {
-        echo "<div class='message'>Query Failed: " . mysqli_error($conn) . "</div>";
-    } elseif (mysqli_num_rows($result) > 0) {
-        echo "<h3>Your Bookings</h3>";
-        echo "<table>";
-        echo "<tr>
+    <div class="container">
+        <?php
+        if (!$result) {
+            echo "<div class='message'>Query Failed: " . mysqli_error($conn) . "</div>";
+        } elseif (mysqli_num_rows($result) > 0) {
+            echo "<h3>Your Bookings</h3>";
+            echo "<table>";
+            echo "<tr>
                 <th>Booking ID</th>
                 <th>User Name</th>
                 <th>Phone Number</th>
@@ -93,47 +105,49 @@ $result = mysqli_query($conn, $query);
                 <th>Actions</th>
               </tr>";
 
-        $bookings = array();
+            $bookings = array();
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            $bookings[] = $row;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $bookings[] = $row;
 
-            echo "<tr>";
-            echo "<td>" . $row['book_id'] . "</td>";
-            echo "<td>" . $row['user_name'] . "</td>";
-            echo "<td>" . $row['phone_no'] . "</td>";
-            echo "<td>" . $row['service_name'] . "</td>";
+                echo "<tr>";
+                echo "<td>" . $row['book_id'] . "</td>";
+                echo "<td>" . $row['user_name'] . "</td>";
+                echo "<td>" . $row['phone_no'] . "</td>";
+                echo "<td>" . $row['service_name'] . "</td>";
 
-            // Display user status
-            $status = $row['paystatus'];
-            echo "<td>";
-            if ($status == 'confirmed') {
-                echo "<span style='color: green;'>Confirmed</span>";
-            } elseif ($status == 'cancelled') {
-                echo "<span style='color: red;'>Cancelled</span>";
-            } else {
-                echo "<span style='color: orange;'>Pending</span>";
+                // Display user status
+                $status = $row['paystatus'];
+                echo "<td>";
+                if ($status == 'confirmed') {
+                    echo "<span style='color: green;'>Confirmed</span>";
+                } elseif ($status == 'cancelled') {
+                    echo "<span style='color: red;'>Cancelled</span>";
+                } else {
+                    echo "<span style='color: orange;'>Pending</span>";
+                }
+                echo "</td>";
+
+                // Add action links
+                echo "<td>
+                <a href='status.php?book_id=" . $row['book_id'] . "&action=cancelled&user_name=" . urlencode($row['user_name']) . "'>Cancel</a> | 
+                <a href='status.php?book_id=" . $row['book_id'] . "&action=confirmed&user_name=" . urlencode($row['user_name']) . "'>Confirm</a>
+                </td>";
+                echo "</tr>";
             }
-            echo "</td>";
 
-            // Add action links
-            echo "<td>
-                    <a href='status.php?book_id=" . $row['book_id'] . "&action=cancelled'>Cancel</a> | 
-                    <a href='status.php?book_id=" . $row['book_id'] . "&action=confirmed'>Confirm</a>
-                  </td>";
-            echo "</tr>";
+            // Store bookings, user_name in session
+            $_SESSION['bookings'] = $bookings;
+            $_SESSION['user_name'] = $username;
+
+            echo "</table>";
+        } else {
+            echo "<div class='message'>No bookings found.</div>";
         }
 
-        // Store bookings in session
-        $_SESSION['bookings'] = $bookings;
-
-        echo "</table>";
-    } else {
-        echo "<div class='message'>No bookings found.</div>";
-    }
-
-    mysqli_close($conn);
-    ?>
-</div>
+        mysqli_close($conn);
+        ?>
+    </div>
 </body>
+
 </html>

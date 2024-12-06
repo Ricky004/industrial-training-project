@@ -31,7 +31,7 @@ session_start();
                         <button class="req-service-btn">Request a Service</button>
                     </a>
                 <?php endif; ?>
-                <?php if (isset($_SESSION['technacian_id'])): ?>
+                <?php if (isset($_SESSION['technician_id'])): ?>
                     <a href="backend/my_services.php">
                         <button id="categoryButton" class="button-category">My Services</button>
                     </a>

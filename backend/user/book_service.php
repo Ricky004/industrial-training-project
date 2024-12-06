@@ -27,6 +27,7 @@ if (!$result) {
 if (mysqli_num_rows($result) > 0) {
     $service_row = mysqli_fetch_assoc($result);
     $service_name = $service_row['service_name']; 
+    $technician_id = $service_row['technacian_id'];
 } else {
     die("Service not found!");
 }
@@ -41,8 +42,7 @@ if (!$result) {
 // Check if any technicians are available
 if (mysqli_num_rows($result) > 0) {
     $technician_row = mysqli_fetch_assoc($result);
-    $technician_id = $technician_row['technacian_id'];
-
+    
     // Check if the service is already booked for this user
     $check_query = "SELECT * FROM book WHERE user_id = $user_id AND service_id = $service_id AND paystatus = 'pending'";
     $check_result = mysqli_query($conn, $check_query);

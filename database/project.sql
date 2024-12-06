@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2024 at 04:39 PM
+-- Generation Time: Dec 06, 2024 at 06:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin` (
   `phone` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `password`, `phone`) VALUES
+(1, 'hello_admin', 'test001@gmail.com', '$2y$10$rrFcef4a49wKPqvvMQw3/uI3i.4Em./PtFPTgpuEc0Z222FSbnKTe', 2344242);
+
 -- --------------------------------------------------------
 
 --
@@ -45,18 +52,17 @@ CREATE TABLE `all services` (
   `id` int(10) NOT NULL,
   `service_name` varchar(50) NOT NULL,
   `price` int(5) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `technacian_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `all services`
 --
 
-INSERT INTO `all services` (`id`, `service_name`, `price`, `description`) VALUES
-(1, 'plumber', 430, 'ww3w wwewew4thhjh dfdf'),
-(2, 'car mecanic', 357, '1. I have 2+ year experince in car repearing.\r\n2. I have the most lowest price in the market right now. '),
-(3, 'fridge repair ', 270, 'fridge repairing from xyz company in 15% low margin'),
-(4, 'computer/laptop repairing ', 369, 'I have 2+ experience in repairing any type of personal computer or laptop. ');
+INSERT INTO `all services` (`id`, `service_name`, `price`, `description`, `technacian_id`) VALUES
+(8, 'Home Cleanig', 240, 'cleaning', 17),
+(9, 'computer/laptop repairing ', 360, 'Best in the field', 18);
 
 -- --------------------------------------------------------
 
@@ -81,11 +87,8 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`book_id`, `service_name`, `request_id`, `technacian_id`, `paystatus`, `assign_date`, `service_id`, `user_id`, `quantity`) VALUES
-(4, 'car mecanic', 0, 3, 'cancelled', '2024-11-24 17:11:57', 2, 5, 2),
-(7, 'fridge repair ', 0, 3, 'cancelled', '2024-11-24 17:12:23', 3, 5, 1),
-(8, 'plumber', 0, 3, 'cancelled', '2024-11-24 17:33:16', 1, 5, 3),
-(9, 'plumber', 0, 3, 'pending', '2024-11-24 20:40:55', 1, 5, 2),
-(10, 'car mecanic', 0, 3, 'pending', '2024-11-24 20:41:01', 2, 5, 1);
+(18, 'Home Cleanig', 0, 17, 'pending', '2024-12-05 11:38:36', 8, 14, 2),
+(19, 'computer/laptop repairing ', 0, 18, 'pending', '2024-12-05 11:40:24', 9, 14, 7);
 
 -- --------------------------------------------------------
 
@@ -112,13 +115,8 @@ CREATE TABLE `technacian` (
 --
 
 INSERT INTO `technacian` (`technacian_id`, `name`, `email`, `password`, `address`, `experience`, `service_id`, `phone`, `type_of_service`, `terms_condition`, `avalability`) VALUES
-(3, 'Batman', 'test001@gmail.com', '$2y$10$lWck94fqjkbXoN6NaH6oMeiMUBSrase1T5zFjVC5KiQf6WV1P4W9m', 'padpp  33d/4 ddd', '', 0, 2344242, 'plumber', 0, 0),
-(4, 'Batman', 'test003@gmail.com', '$2y$10$e0d.fvVrd/I3Znc/h7.9X.sPDIlmnPEpFO6uEnHtDYgllX2doVNIq', 'wrrwrw 33r3ds ', '6-12', 0, 2344242, 'plumber', 0, 0),
-(6, 'Batman', 'test004@gmail.com', '$2y$10$QDx6azZTe9xnlktntiwB6OlVGgEPBmxXVGUR/qb8VxyqN8yff4at6', 'wrrwrw 33r3ds ', '6-12', 0, 2344242, 'plumber', 0, 0),
-(7, 'Batman', 'trstsy@hs.com', '$2y$10$t8duni2ue.T7RPxd9AePZ.gmnuyoP3wl8myVlq1YiqBUFhlQsqDKu', 'wwew wwrw wrw', '0-6', 0, 2344242, 'plumber', 0, 0),
-(8, 'Batman', 'lifoj40243@cutefier.com', '$2y$10$314yibjNOcPSckPed77HquEL59Mxu0uyAa3f9WoyWjjM0d7az/Opu', 'retfff 55/3 trr road', '', 0, 2344242, 'plumber', 0, 0),
-(9, 'Batman', 'test005@gmail.com', '$2y$10$BlmLLBpf6Cz8Uy4Kt6M3t.aiKTr0IJ8pnNuDoNk.O8CyjtMTWgJLi', 'wdfdfdggh rgrg 33/r rg ', '', 0, 2344242, 'plumber', 0, 0),
-(10, 'Anupam ', 'test0011@gmail.com', '$2y$10$CG0D6ByLTtRngsREQhp37e6EepC6R46eUqhxRAStMdbIBQ9tLAhme', 'address is something.', '', 0, 2344242, 'tecnician', 0, 0);
+(17, 'Batman', 'test001@gmail.com', '$2y$10$e3HQIbNeQFRzPRxE7BneNeem20JAR1qDgkUJb4hS/wSNIVOiMgxHm', 'nothing', '6-12', 0, 2344242, 'plumber', 0, 0),
+(18, 'Anirban ', 'test002@gmail.com', '$2y$10$C8Mza8s14z4gNxGpv/qlm.hlkj2OCZZ7qddNuvt8LACW5yCMIvEPm', 'nothing here!', '6-12', 0, 2344242, 'electrician', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -141,10 +139,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_type`, `email`, `phone_no`, `password`, `joining_time`) VALUES
-(1, '', 'user', 'test001@gmail.com', 0, '$2y$10$NJJPiqg2rroR.J39.tffdO9Jhbz/DQ2S.BpdE.eGlNHLwdWObgLZ2', '2024-11-23 14:29:49'),
-(5, 'tridip_01', 'user', 'test003@gmail.com', 13314155, '$2y$10$SM8ix46mYzDJECA3sPXHOOrup4MQcjzAajbIBAI7Ti.TDOUCG.5yu', '2024-11-23 15:19:26'),
-(6, 'tridip_02', 'user', 'test002@gmail.com', 13314155, '$2y$10$dXE8N7N3Mg0ok6oBZx145uhBlib4IQN6dkInztmQL125THhEdsS.u', '2024-11-23 15:32:09'),
-(8, 'tridip_02', 'user', 'test004@gmail.com', 13314155, '$2y$10$jRIbV9Pkmg5EqbcrRNKG6OKaq2IZivvU75HVIEsd3nSUmWVWg1kje', '2024-11-23 15:33:27');
+(14, 'user_1', 'user', 'test1@gmail.com', 13314155, '$2y$10$uAkA2O0PtWscME4OVze/jOnsxB2EQ94N.dA1kEDTkunbFuGQZk83K', '2024-12-05 06:00:12');
 
 --
 -- Indexes for dumped tables
@@ -161,7 +156,8 @@ ALTER TABLE `admin`
 -- Indexes for table `all services`
 --
 ALTER TABLE `all services`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tecnacian_fk` (`technacian_id`);
 
 --
 -- Indexes for table `book`
@@ -194,35 +190,41 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `all services`
 --
 ALTER TABLE `all services`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `book_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `technacian`
 --
 ALTER TABLE `technacian`
-  MODIFY `technacian_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `technacian_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `all services`
+--
+ALTER TABLE `all services`
+  ADD CONSTRAINT `tecnacian_fk` FOREIGN KEY (`technacian_id`) REFERENCES `technacian` (`technacian_id`);
 
 --
 -- Constraints for table `book`

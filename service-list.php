@@ -36,15 +36,17 @@ $result = $conn->query($sql);
     <div class="container">
         <div class="packages">
             <h1>Available Services</h1>
-            
+
             <!-- Dropdown to select service type -->
             <form method="GET" style="margin-bottom: 20px;">
-                <label for="service_type">Filter by Service Type:</label>
-                <select name="service_type" id="service_type" onchange="this.form.submit()">
-                    <option value="all" <?= $service_type === 'all' ? 'selected' : '' ?>>All</option>
-                    <option value="technician" <?= $service_type === 'technician' ? 'selected' : '' ?>>Technician</option>
-                    <option value="electrician" <?= $service_type === 'electrician' ? 'selected' : '' ?>>Electrician</option>
-                </select>
+                <div class="service-type-grp">
+                    <label for="service_type">Service Type: </label>
+                    <select name="service_type" id="service_type" onchange="this.form.submit()">
+                        <option value="all" <?= $service_type === 'all' ? 'selected' : '' ?>>All</option>
+                        <option value="technician" <?= $service_type === 'technician' ? 'selected' : '' ?>>Technician</option>
+                        <option value="electrician" <?= $service_type === 'electrician' ? 'selected' : '' ?>>Electrician</option>
+                    </select>
+                </div>
             </form>
 
             <?php
@@ -111,8 +113,8 @@ $result = $conn->query($sql);
                         $cart_status = htmlspecialchars($cart_row['technician_status']);
                         $cart_quantity = htmlspecialchars($cart_row['quantity']);
 
-                        
-                echo "
+
+                        echo "
             <li class='cart-item'>
                 <strong class='service-name'>$cart_service_name</strong> - 
                 <span class='price'>$cart_status</span> 

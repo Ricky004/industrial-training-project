@@ -232,6 +232,23 @@ h1 {
     cursor: pointer;
 }
 
+.service-type-grp {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.service-type-grp label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+#service_type {
+    height: 25px;
+    border: 1px solid #ddd;
+}
+
 @media (max-width: 600px) {
     .cart-item {
         flex-direction: column;

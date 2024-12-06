@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2024 at 06:27 AM
+-- Generation Time: Dec 06, 2024 at 06:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,16 +53,18 @@ CREATE TABLE `all services` (
   `service_name` varchar(50) NOT NULL,
   `price` int(5) NOT NULL,
   `description` text NOT NULL,
-  `technacian_id` int(10) NOT NULL
+  `technacian_id` int(10) NOT NULL,
+  `type_of_service` enum('technician','electrician','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `all services`
 --
 
-INSERT INTO `all services` (`id`, `service_name`, `price`, `description`, `technacian_id`) VALUES
-(8, 'Home Cleanig', 240, 'cleaning', 17),
-(9, 'computer/laptop repairing ', 360, 'Best in the field', 18);
+INSERT INTO `all services` (`id`, `service_name`, `price`, `description`, `technacian_id`, `type_of_service`) VALUES
+(14, 'electrician work 1', 259, 'edefef ', 22, 'electrician'),
+(15, 'electrician work 2', 120, 'wdwdw', 22, 'electrician'),
+(16, 'technician work 1', 200, 'sdsdsd', 24, 'technician');
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,8 @@ CREATE TABLE `book` (
   `service_name` varchar(255) NOT NULL,
   `request_id` int(10) NOT NULL,
   `technacian_id` int(10) NOT NULL,
-  `paystatus` varchar(50) NOT NULL,
+  `paystatus` enum('confirmed','cancelled','pending','') NOT NULL,
+  `technician_status` enum('cancelled','confirmed','pending','') NOT NULL,
   `assign_date` datetime NOT NULL DEFAULT current_timestamp(),
   `service_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
@@ -86,9 +89,8 @@ CREATE TABLE `book` (
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`book_id`, `service_name`, `request_id`, `technacian_id`, `paystatus`, `assign_date`, `service_id`, `user_id`, `quantity`) VALUES
-(18, 'Home Cleanig', 0, 17, 'pending', '2024-12-05 11:38:36', 8, 14, 2),
-(19, 'computer/laptop repairing ', 0, 18, 'pending', '2024-12-05 11:40:24', 9, 14, 7);
+INSERT INTO `book` (`book_id`, `service_name`, `request_id`, `technacian_id`, `paystatus`, `technician_status`, `assign_date`, `service_id`, `user_id`, `quantity`) VALUES
+(28, 'electrician work 1', 0, 22, 'confirmed', 'pending', '2024-12-06 23:17:03', 14, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE `technacian` (
   `experience` enum('0-6','6-12','1-2','2+') NOT NULL,
   `service_id` int(10) NOT NULL,
   `phone` int(12) NOT NULL,
-  `type_of_service` text NOT NULL,
+  `type_of_service` enum('technician','electrician','','') NOT NULL,
   `terms_condition` tinyint(1) NOT NULL,
   `avalability` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -115,8 +117,8 @@ CREATE TABLE `technacian` (
 --
 
 INSERT INTO `technacian` (`technacian_id`, `name`, `email`, `password`, `address`, `experience`, `service_id`, `phone`, `type_of_service`, `terms_condition`, `avalability`) VALUES
-(17, 'Batman', 'test001@gmail.com', '$2y$10$e3HQIbNeQFRzPRxE7BneNeem20JAR1qDgkUJb4hS/wSNIVOiMgxHm', 'nothing', '6-12', 0, 2344242, 'plumber', 0, 0),
-(18, 'Anirban ', 'test002@gmail.com', '$2y$10$C8Mza8s14z4gNxGpv/qlm.hlkj2OCZZ7qddNuvt8LACW5yCMIvEPm', 'nothing here!', '6-12', 0, 2344242, 'electrician', 0, 0);
+(22, 'test-1', 'test001@gmail.com', '$2y$10$AcJ0Y5kDH9htDXXWfr5rZuLZnTUo4FwL.4Q/vmZt8rAdL3X9grD0.', 'dwdwdwd', '', 0, 2344242, 'electrician', 0, 0),
+(24, 'test-2', 'test002@gmail.com', '$2y$10$7roHzkrajtoQKkYDlKfx1OY4EMJYNUbkkfpPxsNCJP3txkoK0Qmt2', 'wdwd wdwdwd', '', 0, 2344242, 'technician', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -139,7 +141,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_type`, `email`, `phone_no`, `password`, `joining_time`) VALUES
-(14, 'user_1', 'user', 'test1@gmail.com', 13314155, '$2y$10$uAkA2O0PtWscME4OVze/jOnsxB2EQ94N.dA1kEDTkunbFuGQZk83K', '2024-12-05 06:00:12');
+(14, 'user_1', 'user', 'test1@gmail.com', 13314155, '$2y$10$uAkA2O0PtWscME4OVze/jOnsxB2EQ94N.dA1kEDTkunbFuGQZk83K', '2024-12-05 06:00:12'),
+(15, 'tridip_user_1', 'user', 'test2@gmail.com', 13314155, '$2y$10$e5TnQHdobuPZFzmVVGT00.Kk2uBE1VpxOY6DMIDxifhkZu472wXIm', '2024-12-06 06:03:50');
 
 --
 -- Indexes for dumped tables
@@ -196,25 +199,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `all services`
 --
 ALTER TABLE `all services`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `book_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `technacian`
 --
 ALTER TABLE `technacian`
-  MODIFY `technacian_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `technacian_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
